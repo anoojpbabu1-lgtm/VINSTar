@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinstar International | Scheduled System Maintenance</title>
+    <meta name="description" content="Vinstar International website is currently undergoing scheduled system updates to serve you better. We will be back online shortly.">
+    <meta name="theme-color" content="#FFFFFF">
+    <meta property="og:title" content="Vinstar International - Scheduled Maintenance">
+    <meta property="og:description" content="We are updating our global enterprise systems to bring you enhanced performance and security.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        vinstar: {
+                            50: '#FEF2F2',
+                            100: '#FEE2E2',
+                            500: '#E52327',
+                            600: '#D91C20',
+                            700: '#B91C1C',
+                        },
+                        gold: {
+                            400: '#F3C663',
+                            500: '#D4AF37',
+                            600: '#AA8825',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 2.5s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar and light theme utilities */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F8FAFC; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+        
+        .red-gradient-text {
+            background: linear-gradient(135deg, #E52327 0%, #C51D21 60%, #8A1013 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-shadow {
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.06), 0 0 15px rgba(229, 35, 39, 0.04);
+        }
+
+        .shimmer-bg {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+        }
+
+        .glass-panel-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-panel-hover:hover {
+            border-color: rgba(229, 35, 39, 0.3);
+            box-shadow: 0 20px 45px -10px rgba(229, 35, 39, 0.1), 0 0 20px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="h-full bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-900 font-sans antialiased overflow-hidden flex flex-col justify-between select-none relative">
+
+    <!-- Interactive Canvas Particle & Grid Background -->
+    <canvas id="bg-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+    
+    <!-- Subtle Geometric Overlay Patterns -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(229,35,39,0.04)_0,transparent_70%)] pointer-events-none z-0"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none z-0"></div>
+
+    <!-- MAIN CONTAINER (Single Screen Fit with Responsive Flex padding) -->
+    <div class="relative z-10 h-full max-h-screen w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex flex-col justify-between">
+        
+        <!-- HEADER / NAVIGATION -->
+        <header class="flex items-center justify-between w-full pt-1 sm:pt-2">
+            <!-- Brand Logo -->
+            <div class="flex items-center group cursor-pointer" onclick="location.reload()" title="Vinstar International">
+                <img src="assets/logo.png" alt="Vinstar Logo" class="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+            </div>
+
+            <!-- Top Right Action Controls -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- System Status Trigger Badge -->
+                <button onclick="openStatusModal()" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 border border-slate-200/90 hover:border-vinstar-500/40 text-xs text-slate-700 hover:text-slate-900 transition-all shadow-sm backdrop-blur-md">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                    </span>
+                    <span class="hidden sm:inline font-semibold">System Maintenance</span>
+                    <span class="text-slate-500 text-[11px] font-mono">[94%]</span>
+                    <i class="fa-solid fa-chart-line text-[10px] text-vinstar-500 ml-0.5"></i>
+                </button>
+
+                <!-- Audio Ambient Toggle Button -->
+                <button id="sound-btn" onclick="toggleAudio()" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/90 border border-slate-200/90 hover:border-slate-400 text-slate-500 hover:text-vinstar-500 flex items-center justify-center transition-all text-xs shadow-sm" title="Toggle Ambient Audio Tone">
+                    <i id="sound-icon" class="fa-solid fa-volume-xmark"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- CENTER CONTENT CARD -->
+        <main class="my-auto py-4 sm:py-6 flex flex-col items-center text-center max-w-3xl mx-auto w-full">
+            
+            <!-- Status Badge Header -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-vinstar-50 border border-vinstar-200 text-vinstar-700 text-xs sm:text-sm font-semibold mb-4 sm:mb-6 animate-float shadow-sm backdrop-blur-md">
+                <i class="fa-solid fa-shield-halved text-vinstar-500 text-xs"></i>
+                <span>Scheduled Systems Maintenance & Core Upgrades</span>
+                <span class="bg-vinstar-100 text-vinstar-800 text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">v4.8.2</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15] max-w-2xl">
+                We Are Updating <br class="hidden sm:inline">
+                <span class="red-gradient-text">Our Global Systems</span>
+            </h1>
+
+            <!-- Subheading -->
+            <p class="mt-3 sm:mt-5 text-sm sm:text-base md:text-lg text-slate-600 font-body max-w-xl leading-relaxed font-normal">
+                We're currently performing scheduled platform enhancements and server optimizations to provide you with seamless enterprise performance. We'll be back shortly.
+            </p>
+
+            <!-- LIVE COUNTDOWN TIMER & PROGRESS BAR -->
+            <div class="w-full max-w-lg mt-6 sm:mt-8 p-4 sm:p-5 rounded-2xl glass-panel glass-panel-hover card-shadow">
+                
+                <!-- Progress Header -->
+                <div class="flex items-center justify-between text-xs sm:text-sm mb-2 font-semibold">
+                    <span class="text-slate-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrows-rotate text-vinstar-500 animate-spin" style="animation-duration: 8s;"></i>
+                        Estimated Maintenance Completion
+                    </span>
+                    <span class="text-vinstar-600 font-mono font-bold" id="progress-percent">94%</span>
+                </div>
+
+                <!-- Animated Progress Bar -->
+                <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200 mb-5 relative">
+                    <div id="progress-fill" class="h-full rounded-full bg-gradient-to-r from-vinstar-600 via-vinstar-500 to-amber-500 transition-all duration-1000 relative overflow-hidden" style="width: 94%;">
+                        <div class="absolute inset-0 shimmer-bg"></div>
+                    </div>
+                </div>
+
+                <!-- Countdown Timer Blocks (30 Days Target) -->
+                <div class="grid grid-cols-4 gap-2 sm:gap-3 text-center" id="countdown">
+                    <div class="bg-slate-50/90 border border-slate-200/90 rounded-xl p-2 sm:p-3 shadow-sm">
+                        <span id="timer-days" class="block text-xl sm:text-3xl font-extrabold text-slate-900 font-mono tracking-tight">30</span>
+                        <span class="text-[10px] sm:text-xs text-slate-500 uppercase tracking-widest font-semibold">Days</span>
+                    </div>
+                    <div class="bg-slate-50/90 border border-slate-200/90 rounded-xl p-2 sm:p-3 shadow-sm">
+                        <span id="timer-hours" class="block text-xl sm:text-3xl font-extrabold text-slate-900 font-mono tracking-tight">00</span>
+                        <span class="text-[10px] sm:text-xs text-slate-500 uppercase tracking-widest font-semibold">Hours</span>
+                    </div>
+                    <div class="bg-slate-50/90 border border-slate-200/90 rounded-xl p-2 sm:p-3 shadow-sm">
+                        <span id="timer-minutes" class="block text-xl sm:text-3xl font-extrabold text-slate-900 font-mono tracking-tight">00</span>
+                        <span class="text-[10px] sm:text-xs text-slate-500 uppercase tracking-widest font-semibold">Minutes</span>
+                    </div>
+                    <div class="bg-slate-50/90 border border-slate-200/90 rounded-xl p-2 sm:p-3 shadow-sm">
+                        <span id="timer-seconds" class="block text-xl sm:text-3xl font-extrabold text-slate-900 font-mono tracking-tight">00</span>
+                        <span class="text-[10px] sm:text-xs text-slate-500 uppercase tracking-widest font-semibold">Seconds</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERACTIVE CTA FORM (Notify Me) -->
+            <div class="w-full max-w-lg mt-6 sm:mt-8">
+                <form id="subscribe-form" onsubmit="handleSubscribe(event)" class="relative">
+                    <div id="form-container" class="flex flex-col sm:flex-row items-stretch gap-2.5 sm:gap-0 p-1.5 rounded-2xl sm:rounded-full bg-white border border-slate-300 focus-within:border-vinstar-500 transition-all shadow-lg backdrop-blur-md">
+                        
+                        <div class="relative flex-grow flex items-center pl-4 pr-2">
+                            <i class="fa-regular fa-envelope text-slate-400 text-sm mr-2.5"></i>
+                            <input 
+                                type="email" 
+                                id="email-input" 
+                                required 
+                                placeholder="Enter your corporate email address..." 
+                                class="w-full bg-transparent text-sm text-slate-900 placeholder-slate-400 focus:outline-none font-sans py-2 sm:py-3"
+                                autocomplete="email"
+                            >
+                        </div>
+                        
+                        <button 
+                            type="submit" 
+                            id="submit-btn"
+                            class="px-6 py-3 sm:py-3 rounded-xl sm:rounded-full bg-gradient-to-r from-vinstar-500 to-vinstar-600 hover:from-vinstar-600 hover:to-vinstar-700 text-white font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md hover:shadow-vinstar-500/25 flex items-center justify-center gap-2 group whitespace-nowrap active:scale-95 cursor-pointer"
+                        >
+                            <span>Notify Me</span>
+                            <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+
+                    <!-- Small hint text below form -->
+                    <p class="mt-2 text-[11px] text-slate-500 flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-lock text-[10px] text-slate-400"></i>
+                        We respect your privacy. Zero spam. Instant launch notification only.
+                    </p>
+                </form>
+
+                <!-- SUCCESS MESSAGE (Hidden by default, toggled via JS) -->
+                <div id="success-banner" class="hidden p-4 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-sm text-center shadow-lg backdrop-blur-md animate-fade-in">
+                    <div class="flex items-center justify-center gap-2 text-emerald-700 font-bold mb-1">
+                        <i class="fa-solid fa-circle-check text-base"></i>
+                        <span>Notification Request Sent!</span>
+                    </div>
+                    <p class="text-xs text-emerald-800 font-body" id="success-email-text">
+                        Notification request registered for your email.
+                    </p>
+                    <div class="mt-2.5 flex items-center justify-center gap-3">
+                        <button id="resend-mail-btn" onclick="sendMailToVinstar()" class="px-3 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-[11px] transition-colors shadow-sm flex items-center gap-1">
+                            <i class="fa-regular fa-paper-plane text-[10px]"></i>
+                            <span>Send Email to vinstaruae@gmail.com</span>
+                        </button>
+                        <button onclick="resetForm()" class="text-[11px] text-emerald-700 font-semibold underline hover:text-emerald-900">
+                            Submit another email
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- FOOTER & CONTACT SECTION -->
+        <footer class="w-full pt-3 pb-1 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
+            
+            <!-- Immediate Contact Support -->
+            <div class="flex items-center gap-2">
+                <span class="text-slate-600">Need immediate assistance?</span>
+                <a href="mailto:vinstaruae@gmail.com" class="text-vinstar-600 hover:text-vinstar-700 font-semibold transition-colors flex items-center gap-1">
+                    vinstaruae@gmail.com
+                </a>
+                <button onclick="copySupportEmail()" class="p-1 text-slate-400 hover:text-slate-600 transition-colors" title="Copy Support Email">
+                    <i id="copy-icon" class="fa-regular fa-copy text-xs"></i>
+                </button>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-[11px] sm:text-xs text-slate-500 font-body">
+                &copy; 2021 Vinstar International FZE - LLC . All rights reserved.
+            </div>
+        </footer>
+    </div>
+
+    <!-- SYSTEM STATUS MODAL -->
+    <div id="status-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md animate-fade-in">
+        <div class="w-full max-w-md bg-white border border-slate-200 rounded-2xl shadow-2xl p-6 relative">
+            <button onclick="closeStatusModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-9 h-9 rounded-xl bg-vinstar-50 border border-vinstar-200 flex items-center justify-center text-vinstar-600">
+                    <i class="fa-solid fa-server"></i>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-slate-900">System Upgrade Breakdown</h3>
+                    <p class="text-xs text-slate-500">Real-time status across global infrastructure</p>
+                </div>
+            </div>
+
+            <div class="space-y-3.5 text-xs">
+                <!-- Status Item 1 -->
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <span class="text-slate-800 font-semibold">Global CDN & Edge Nodes</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-mono text-[11px] font-medium">Completed (100%)</span>
+                </div>
+
+                <!-- Status Item 2 -->
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <span class="text-slate-800 font-semibold">Core Relational Databases</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-mono text-[11px] font-medium">Completed (100%)</span>
+                </div>
+
+                <!-- Status Item 3 -->
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                        <span class="text-slate-800 font-semibold">API Gateway Routing</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-mono text-[11px] font-medium">In Progress (95%)</span>
+                </div>
+
+                <!-- Status Item 4 -->
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                        <span class="text-slate-800 font-semibold">Security & Compliance Verification</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-mono text-[11px] font-medium">Verifying (88%)</span>
+                </div>
+            </div>
+
+            <div class="mt-5 pt-4 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-500">
+                <span>Maintenance Window ID: <strong class="text-slate-700 font-mono">MW-2026-0719</strong></span>
+                <button onclick="closeStatusModal()" class="px-4 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- JAVASCRIPT LOGIC & CANVAS ANIMATION -->
+    <script>
+        // Set current year dynamically if element present
+        const yearEl = document.getElementById('current-year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+        // Check stored email subscription
+        const savedEmail = localStorage.getItem('vinstar_sub_email');
+        if (savedEmail) {
+            showSuccessState(savedEmail);
+        }
+
+        // Handle Email Subscription
+        let currentSubscribedEmail = '';
+
+        function sendMailToVinstar(email) {
+            const mail = email || currentSubscribedEmail || localStorage.getItem('vinstar_sub_email') || '';
+            const subject = encodeURIComponent('Vinstar System Maintenance Notification Request');
+            const body = encodeURIComponent(`Hello Vinstar Team,\n\nPlease notify me when the Vinstar International website and systems are back online.\n\nSubscriber Email: ${mail}\nTimestamp: ${new Date().toLocaleString()}`);
+            window.location.href = `mailto:vinstaruae@gmail.com?subject=${subject}&body=${body}`;
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('email-input');
+            const email = emailInput.value.trim();
+            
+            if (email) {
+                currentSubscribedEmail = email;
+                localStorage.setItem('vinstar_sub_email', email);
+                showSuccessState(email);
+                showToast(`Notification request sent for ${email}!`, 'success');
+                sendMailToVinstar(email);
+            }
+        }
+
+        function showSuccessState(email) {
+            currentSubscribedEmail = email;
+            document.getElementById('subscribe-form').classList.add('hidden');
+            const successBanner = document.getElementById('success-banner');
+            document.getElementById('success-email-text').textContent = `Notification request registered for ${email}. Email dispatch prepared for vinstaruae@gmail.com.`;
+            successBanner.classList.remove('hidden');
+        }
+
+        function resetForm() {
+            localStorage.removeItem('vinstar_sub_email');
+            currentSubscribedEmail = '';
+            document.getElementById('subscribe-form').classList.remove('hidden');
+            document.getElementById('success-banner').classList.add('hidden');
+            document.getElementById('email-input').value = '';
+        }
+
+        // Copy Support Email
+        function copySupportEmail() {
+            navigator.clipboard.writeText('vinstaruae@gmail.com').then(() => {
+                const icon = document.getElementById('copy-icon');
+                icon.className = 'fa-solid fa-check text-emerald-600 text-xs';
+                showToast('Support email copied to clipboard!', 'info');
+                setTimeout(() => {
+                    icon.className = 'fa-regular fa-copy text-xs';
+                }, 2500);
+            });
+        }
+
+        // Toast Notification System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto px-4 py-2.5 rounded-xl border text-xs font-medium shadow-xl backdrop-blur-md flex items-center gap-2 transform translate-y-4 opacity-0 transition-all duration-300 ${
+                type === 'success' ? 'bg-emerald-50 border-emerald-300 text-emerald-900' : 'bg-white border-vinstar-200 text-slate-800'
+            }`;
+            toast.innerHTML = `<i class="${type === 'success' ? 'fa-solid fa-circle-check text-emerald-600' : 'fa-solid fa-circle-info text-vinstar-500'}"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Modal Controls
+        function openStatusModal() {
+            document.getElementById('status-modal').classList.remove('hidden');
+        }
+        function closeStatusModal() {
+            document.getElementById('status-modal').classList.add('hidden');
+        }
+
+        // Live Countdown Timer Simulation (30 Days)
+        let targetTime = new Date().getTime() + (30 * 24 * 60 * 60 * 1000); // 30 Days
+        
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = targetTime - now;
+
+            if (diff <= 0) {
+                if (document.getElementById('timer-days')) document.getElementById('timer-days').textContent = '00';
+                document.getElementById('timer-hours').textContent = '00';
+                document.getElementById('timer-minutes').textContent = '00';
+                document.getElementById('timer-seconds').textContent = '00';
+                document.getElementById('progress-percent').textContent = '100%';
+                document.getElementById('progress-fill').style.width = '100%';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            if (document.getElementById('timer-days')) {
+                document.getElementById('timer-days').textContent = String(days).padStart(2, '0');
+            }
+            document.getElementById('timer-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('timer-minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('timer-seconds').textContent = String(seconds).padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Audio Tone Synthesis (Web Audio API - Subtle ambient synth chord toggle)
+        let audioCtx = null;
+        let isAudioPlaying = false;
+        let oscillators = [];
+
+        function toggleAudio() {
+            const soundBtn = document.getElementById('sound-btn');
+            const soundIcon = document.getElementById('sound-icon');
+
+            if (!isAudioPlaying) {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                // Create ambient warm chord
+                const freqs = [110, 164.81, 220, 329.63]; // A2, E3, A3, E4
+                oscillators = freqs.map(f => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = f;
+                    gain.gain.value = 0.015; // Subtle volume
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start();
+                    return { osc, gain };
+                });
+
+                isAudioPlaying = true;
+                soundIcon.className = 'fa-solid fa-volume-high text-vinstar-500';
+                soundBtn.classList.add('border-vinstar-500');
+                showToast('Ambient corporate audio tone enabled', 'info');
+            } else {
+                oscillators.forEach(o => {
+                    o.gain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.1);
+                    setTimeout(() => o.osc.stop(), 200);
+                });
+                isAudioPlaying = false;
+                soundIcon.className = 'fa-solid fa-volume-xmark';
+                soundBtn.classList.remove('border-vinstar-500');
+                showToast('Ambient audio muted', 'info');
+            }
+        }
+
+        // ABSTRACT PARTICLE NETWORK BACKGROUND CANVAS (LIGHT THEME)
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        const particleCount = 60;
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.35;
+                this.vy = (Math.random() - 0.5) * 0.35;
+                this.radius = Math.random() * 1.8 + 0.8;
+                // Soft Vinstar Red & Slate Blue particles
+                this.color = Math.random() > 0.4 ? 'rgba(229, 35, 39, ' : 'rgba(100, 116, 139, ';
+                this.alpha = Math.random() * 0.35 + 0.15;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color + this.alpha + ')';
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        let mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Connect nearby particles
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        const alpha = (1 - dist / 130) * 0.12;
+                        ctx.strokeStyle = `rgba(229, 35, 39, ${alpha})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+
+                // Interactive line to cursor
+                if (mouse.x && mouse.y) {
+                    const mdx = particles[i].x - mouse.x;
+                    const mdy = particles[i].y - mouse.y;
+                    const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+
+                    if (mdist < 160) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        const mAlpha = (1 - mdist / 160) * 0.2;
+                        ctx.strokeStyle = `rgba(229, 35, 39, ${mAlpha})`;
+                        ctx.lineWidth = 0.7;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+    </script>
+</body>
+</html>
